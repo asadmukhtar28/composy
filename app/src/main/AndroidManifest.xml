@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.asad.composy">
 
     <application
-        android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Composy"
-        tools:targetApi="31">
+        android:theme="@style/Theme.Composy">
         <activity
             android:name=".multiselection.MultiSelectionActivity"
             android:label="@string/title_activity_multi_selection"
-            android:theme="@style/Theme.Composy">
-
-        </activity>
+            android:theme="@style/Theme.Composy" />
+        <activity
+            android:name=".singleselection.SingleSelectionActivity"
+            android:label="@string/title_activity_single_selection"
+            android:theme="@style/Theme.Composy" />
         <activity
             android:name=".HomeActivity"
             android:exported="true"

@@ -1,25 +1,13 @@
-package com.asad.composy.multiselection
+package com.asad.composy.singleselection
 
-import androidx.compose.runtime.mutableStateListOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.asad.composy.R
 import com.asad.composy.data.DataModel
 
-class MultiSelectionViewModel : ViewModel() {
-    private val selectedItemCount = MutableLiveData(0)
+class SingleSelectionViewModel : ViewModel() {
 
-    private val listItems = mutableStateListOf<DataModel>().apply {
+    private val listItems = mutableListOf<DataModel>().apply {
         addAll(dataList)
-    }
-
-    fun getSelectedItemCount(): LiveData<Int> {
-        return selectedItemCount
-    }
-
-    fun updateSelectedItemCount(count: Int) {
-        this.selectedItemCount.value = count
     }
 
     fun getItems(): List<DataModel> {

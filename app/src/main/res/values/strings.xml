@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Composy</string>
     <string name="title_activity_multi_selection">MultiSelectionActivity</string>
+    <string name="title_activity_single_selection">SingleSelectionActivity</string>
 
     <string name="inversions">Inversions</string>
     <string name="quick_yoga">Quick yoga</string>

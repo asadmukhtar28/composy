@@ -1,21 +1,15 @@
-@file:OptIn(ExperimentalUnitApi::class)
+package com.asad.composy.singleselection
 
-package com.asad.composy.multiselection
-
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -26,58 +20,46 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.ExperimentalUnitApi
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.asad.composy.R
 import com.asad.composy.data.DataModel
 
 @Composable
-fun MultiSelectionScreen(
+fun SingleSelectionScreen(
     modifier: Modifier = Modifier,
-    multiSelectionViewModel: MultiSelectionViewModel = viewModel()
+    singleSelectionViewModel: SingleSelectionViewModel = viewModel()
 ) {
     ListItems(
         modifier = modifier.padding(4.dp),
-        multiSelectionViewModel.getItems(),
-        multiSelectionViewModel.getSelectedItemCount()
-    ) {
-        multiSelectionViewModel.updateSelectedItemCount(it)
-    }
+        singleSelectionViewModel.getItems()
+    )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ListItems(
     modifier: Modifier = Modifier,
-    listItems: List<DataModel>,
-    count: LiveData<Int> = MutableLiveData(0),
-    itemsCount: (selectedItemCount: Int) -> Unit
+    listItems: List<DataModel>
 ) {
-    var selectedItemCount by rememberSaveable { mutableStateOf(0) }
+    var selectedIndex by rememberSaveable { mutableStateOf(-1) }
 
     LazyColumn(modifier) {
-        stickyHeader {
-            RvHeader(count = count)
-        }
-        items(items = listItems) { item ->
-            RvRow(modifier = Modifier.padding(4.dp), item) { checkedState ->
-                if (checkedState)
-                    ++selectedItemCount
-                else --selectedItemCount
-
-                itemsCount.invoke(selectedItemCount)
+        itemsIndexed(items = listItems) { index, item ->
+            RvRow(
+                modifier = Modifier.padding(4.dp),
+                item,
+                index,
+                selectedIndex == index
+            ) { index ->
+                selectedIndex = if (selectedIndex == index) {
+                    -1
+                } else
+                    index
             }
             Divider(
                 color = Color(0xFFC7C7C7),
@@ -87,51 +69,16 @@ fun ListItems(
     }
 }
 
-@OptIn(ExperimentalUnitApi::class)
-@Composable
-fun RvHeader(modifier: Modifier = Modifier, count: LiveData<Int> = MutableLiveData(0)) {
-
-    val selectedItemCount = count.observeAsState().value
-
-    val selectedItems =
-        buildAnnotatedString {
-            append("You have selected ")
-            withStyle(
-                style = SpanStyle(
-                    color = Color.Green,
-                    fontSize = TextUnit(20f, TextUnitType.Sp)
-                )
-            ) {
-                append("$selectedItemCount")
-            }
-            append(" items")
-        }
-
-
-    Surface(
-        color = Color.LightGray,
-        modifier = modifier
-            .fillMaxWidth()
-    ) {
-        Text(
-            text = selectedItems,
-            modifier = modifier
-                .padding(16.dp)
-        )
-    }
-}
-
 @Composable
 fun RvRow(
     modifier: Modifier = Modifier,
     item: DataModel,
-    onRowItemClick: (state: Boolean) -> Unit
+    index: Int,
+    selected: Boolean,
+    onSelected: (index: Int) -> Unit
 ) {
-    var checkedState by rememberSaveable { mutableStateOf(false) }
-
     Column(modifier.clickable {
-        checkedState = !checkedState
-        onRowItemClick.invoke(checkedState)
+        onSelected.invoke(index)
     }) {
         Spacer(modifier = Modifier.height(16.dp))
         Row(
@@ -161,9 +108,9 @@ fun RvRow(
                 maxLines = 2
             )
 
-            Checkbox(
-                checked = checkedState,
-                modifier = Modifier, onCheckedChange = null
+            Image(
+                painter = painterResource(id = if (selected) R.drawable.ic_selected else R.drawable.ic_unselected),
+                contentDescription = null
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -172,6 +119,6 @@ fun RvRow(
 
 @Preview
 @Composable
-fun MultiSelectionScreenPreview() {
-    MultiSelectionScreen()
+fun SingleSelectionScreenPreview() {
+    SingleSelectionScreen()
 }
