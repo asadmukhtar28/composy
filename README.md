@@ -12,5 +12,5 @@ To try out these sample apps, you need to use [Android Studio](https://developer
 
 🧬 Samples
 
-|:-----|---------| |  <br> Single Selection in Lazy Columns <br> | ![gif](
-screenshots/multi_selection.gif) | | | |
+|:-----|---------| |  <br> Single Selection in Lazy Columns <br> |
+![gif](screenshots/multi_selection.gif) 
