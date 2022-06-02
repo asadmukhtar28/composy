@@ -10,7 +10,7 @@ To try out these sample apps, you need to use [Android Studio](https://developer
 . You can clone this repository or import the project from Android Studio following the steps
 [here](https://developer.android.com/jetpack/compose/setup#sample).
 
-🧬 Samples
-
-|:-----|---------| |  <br> Single Selection in Lazy Columns <br> |
+🧬 Sample
+------------
+<sup>Single Selection in Lazy Columns</sup>
 ![gif](screenshots/multi_selection.gif) 
