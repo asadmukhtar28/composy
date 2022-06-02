@@ -12,7 +12,9 @@ To try out these this repo, you need to use [Android Studio](https://developer.a
 
 🧬 Single Selection
 ------------
-![gif](screenshots/single_selection.gif)
+![gif](screenshots/single_selection.gif, width = "400", height="400")
+
+<img src="screenshots/single_selection.gif" width="400" height="790" />
 
 🧬 Multi Selection
 ------------
