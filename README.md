@@ -6,15 +6,15 @@ For more information, please [read the documentation](https://developer.android.
 
 💻 Requirements
 ------------
-To try out these this repo, you need to use [Android Studio](https://developer.android.com/studio)
+To try out this repo, you need to use [Android Studio](https://developer.android.com/studio)
 . You can clone this repository or import the project from Android Studio following the steps
 [here](https://developer.android.com/jetpack/compose/setup#sample).
 
 🧬 Single Selection
 ------------
-<img src="screenshots/single_selection.gif" width="400" height="700" />
+<img src="screenshots/single_selection.gif" width="400" height="710" />
 
 🧬 Multi Selection
 ------------
 
-<img src="screenshots/multi_selection.gif" width="400" height="700" />
+<img src="screenshots/multi_selection.gif" width="400" height="710" />
